@@ -10,3 +10,5 @@
 - Go to line for a layer or for a clicked move. The view reloads when the file changes on disk.
 - Files are read in a worker thread. Files over 500 MB show a message and are not read.
 - Sponsor and More free viewers links at the bottom of the viewer (setting gcodeViewer.showSupportLinks).
+- The "More free viewers" list and the README list now show the 15 Zovo extensions on the Marketplace under their current names, and 11 that are coming soon.
+- Extensions for related files now come first, starting with DXF Viewer & CAD Viewer for 2D Drawings.
