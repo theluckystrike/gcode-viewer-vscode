@@ -1,0 +1,260 @@
+{
+  "name": "zovo-gcode-viewer",
+  "displayName": "GCode Viewer & 3D Print Preview",
+  "description": "GCode viewer for 3D printing and CNC in VS Code. See the toolpath in 3D by feature or speed, step through layers, play the print, check print time and filament, and jump to the line.",
+  "version": "0.1.0",
+  "publisher": "zovo",
+  "license": "MIT",
+  "icon": "icon.png",
+  "galleryBanner": {
+    "color": "#17212B",
+    "theme": "dark"
+  },
+  "engines": {
+    "vscode": "^1.90.0",
+    "node": ">=18"
+  },
+  "categories": [
+    "Visualization",
+    "Other"
+  ],
+  "keywords": [
+    "gcode viewer",
+    "gcode",
+    "g-code",
+    "g-code viewer",
+    "gcode preview",
+    "3d print preview",
+    "3d printing",
+    "3d printer",
+    "toolpath",
+    "toolpath viewer",
+    "cnc",
+    "nc viewer",
+    "nc file",
+    "slicer",
+    "cura",
+    "prusaslicer",
+    "orcaslicer",
+    "bambu studio",
+    "klipper",
+    "marlin",
+    "reprap",
+    "layer viewer",
+    "print time",
+    "filament",
+    "cnc milling",
+    "grbl",
+    "linuxcnc",
+    "gco",
+    "ngc",
+    "offline"
+  ],
+  "main": "./dist/extension.js",
+  "activationEvents": [],
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": true
+    },
+    "virtualWorkspaces": true
+  },
+  "contributes": {
+    "customEditors": [
+      {
+        "viewType": "gcodeViewer.preview",
+        "displayName": "GCode Viewer",
+        "selector": [
+          { "filenamePattern": "*.gcode" },
+          { "filenamePattern": "*.gco" },
+          { "filenamePattern": "*.nc" }
+        ],
+        "priority": "default"
+      },
+      {
+        "viewType": "gcodeViewer.previewOption",
+        "displayName": "GCode Viewer",
+        "selector": [
+          { "filenamePattern": "*.g" },
+          { "filenamePattern": "*.ngc" },
+          { "filenamePattern": "*.tap" },
+          { "filenamePattern": "*.cnc" }
+        ],
+        "priority": "option"
+      }
+    ],
+    "commands": [
+      {
+        "command": "gcodeViewer.openWalkthrough",
+        "title": "Get Started",
+        "category": "GCode Viewer"
+      },
+      {
+        "command": "gcodeViewer.openWith",
+        "title": "Open in GCode Viewer",
+        "category": "GCode Viewer"
+      },
+      {
+        "command": "gcodeViewer.supportDeveloper",
+        "title": "Support the developer",
+        "category": "GCode Viewer"
+      },
+      {
+        "command": "gcodeViewer.moreViewers",
+        "title": "More free viewers",
+        "category": "GCode Viewer"
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "gcodeViewer.openWith",
+          "when": "resourceExtname =~ /^\\.(gcode|gco|g|nc|ngc|tap|cnc)$/i",
+          "group": "navigation@9"
+        }
+      ],
+      "editor/title": [
+        {
+          "command": "gcodeViewer.openWith",
+          "when": "resourceExtname =~ /^\\.(gcode|gco|g|nc|ngc|tap|cnc)$/i && !activeCustomEditorId",
+          "group": "navigation@9"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "gcodeViewer.openWith",
+          "when": "resourceExtname =~ /^\\.(gcode|gco|g|nc|ngc|tap|cnc)$/i"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "GCode Viewer",
+      "properties": {
+        "gcodeViewer.maxFileMB": {
+          "type": "number",
+          "default": 500,
+          "minimum": 1,
+          "maximum": 2048,
+          "description": "G-code files up to this size are read. Larger files show a message and are not read."
+        },
+        "gcodeViewer.maxMoves": {
+          "type": "number",
+          "default": 5000000,
+          "minimum": 10000,
+          "maximum": 20000000,
+          "description": "Most moves drawn in 3D. Stats and print time still cover the whole file."
+        },
+        "gcodeViewer.mode": {
+          "type": "string",
+          "enum": ["auto", "print", "cnc"],
+          "enumDescriptions": [
+            "CNC for .nc, .ngc, .tap and .cnc files and for files with no extrusion. 3D print for the rest.",
+            "Always read files as 3D printer G-code.",
+            "Always read files as CNC G-code."
+          ],
+          "default": "auto",
+          "description": "How moves are read and colored. The toolbar can switch it per tab."
+        },
+        "gcodeViewer.filamentDiameter": {
+          "type": "number",
+          "default": 1.75,
+          "minimum": 0.5,
+          "maximum": 5,
+          "description": "Filament diameter in mm, used for the weight estimate."
+        },
+        "gcodeViewer.filamentDensity": {
+          "type": "number",
+          "default": 1.24,
+          "minimum": 0.5,
+          "maximum": 5,
+          "description": "Filament density in g/cm³, used for the weight estimate. PLA is about 1.24, PETG 1.27, ABS 1.04."
+        },
+        "gcodeViewer.rapidFeed": {
+          "type": "number",
+          "default": 5000,
+          "minimum": 100,
+          "maximum": 100000,
+          "description": "Speed in mm/min used for G0 rapid moves in the time estimate (CNC files rarely state it)."
+        },
+        "gcodeViewer.askForRating": {
+          "type": "boolean",
+          "default": true,
+          "description": "Ask one time for a Marketplace rating after you have used GCode Viewer for a few days. You can answer \"Later\" or \"Don't ask again\". Nothing is sent anywhere."
+        },
+        "gcodeViewer.showSupportLinks": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show the small Sponsor and More free viewers links at the bottom of the viewer. The change shows in files you open next. Nothing is sent anywhere."
+        }
+      }
+    },
+    "walkthroughs": [
+      {
+        "id": "gcodeViewer.start",
+        "title": "Get started with GCode Viewer",
+        "description": "Preview 3D printer and CNC G-code in VS Code.",
+        "steps": [
+          {
+            "id": "open",
+            "title": "Open a G-code file",
+            "description": "Click a .gcode, .gco or .nc file in the Explorer. Drag to orbit, right-drag to pan and scroll to zoom.\n[Find a G-code file](command:workbench.action.quickOpen?%5B%22.gcode%22%5D)",
+            "media": {
+              "image": "images/cube-feature.png",
+              "altText": "A cube print in GCode Viewer colored by feature, with the layer slider and print stats."
+            },
+            "completionEvents": [
+              "onCommand:workbench.action.quickOpen"
+            ]
+          },
+          {
+            "id": "layers",
+            "title": "Step through layers and play the print",
+            "description": "Move the layer slider or press the arrow keys. Press Play to watch the nozzle draw the print. Go to line opens the layer in the text editor.",
+            "media": {
+              "markdown": "walkthrough/layers.md"
+            }
+          },
+          {
+            "id": "cnc",
+            "title": "CNC programs",
+            "description": "Files ending in .nc open in CNC mode. Rapids, cuts, plunges and G2/G3 arcs get their own colors, and the slider steps through Z passes.",
+            "media": {
+              "markdown": "walkthrough/cnc.md"
+            }
+          },
+          {
+            "id": "settings",
+            "title": "Filament and size settings",
+            "description": "Set the filament diameter and density for the weight estimate, and the largest file to open.\n[Open settings](command:workbench.action.openSettings?%5B%22gcodeViewer%22%5D)",
+            "media": {
+              "markdown": "walkthrough/settings.md"
+            },
+            "completionEvents": [
+              "onCommand:workbench.action.openSettings"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "scripts": {
+    "build": "node scripts/build.js --production",
+    "test": "node scripts/build.js --production && node --test \"test/*.test.js\"",
+    "samples": "node scripts/make-samples.js samples",
+    "package": "npm run build && npx -y @vscode/vsce package --no-dependencies -o dist/"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2",
+    "three": "0.187.0"
+  },
+  "homepage": "https://github.com/theluckystrike/gcode-viewer-vscode#readme",
+  "bugs": {
+    "url": "https://github.com/theluckystrike/gcode-viewer-vscode/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/theluckystrike/gcode-viewer-vscode"
+  },
+  "sponsor": {
+    "url": "https://github.com/sponsors/theluckystrike"
+  }
+}
