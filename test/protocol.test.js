@@ -84,7 +84,7 @@ test('source scan: the host and worker have no network modules and never write f
 test('manifest: editors, file patterns, settings and 30 keywords', () => {
   const pkg = require('../package.json');
   assert.equal(pkg.publisher, 'zovo');
-  assert.equal(pkg.version, '0.1.0');
+  assert.match(pkg.version, /^\d+\.\d+\.\d+$/); // monetize.py rollouts bump it
   assert.ok(pkg.displayName.length <= 45);
   assert.equal(pkg.keywords.length, 30);
   const eds = Object.fromEntries(pkg.contributes.customEditors.map((e) => [e.viewType, e]));
