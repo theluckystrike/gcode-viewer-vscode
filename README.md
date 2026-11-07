@@ -1,4 +1,4 @@
-# GCode Viewer & 3D Print Preview
+# GCode Viewer, CNC Viewer & 3D Print Preview
 
 See your 3D printer or CNC G-code as a 3D toolpath in VS Code, layer by layer, and find the exact line behind any move.
 

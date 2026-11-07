@@ -1,7 +1,7 @@
 {
   "name": "zovo-gcode-viewer",
-  "displayName": "GCode Viewer & 3D Print Preview",
-  "description": "GCode viewer for 3D printing and CNC in VS Code. See the toolpath in 3D by feature or speed, step through layers, play the print, check print time and filament, and jump to the line.",
+  "displayName": "GCode Viewer, CNC Viewer & 3D Print Preview",
+  "description": "G-code viewer and CNC viewer for 3D printing and CNC milling in VS Code. See the toolpath in 3D by feature or speed, step through layers, play the print, check print time and filament, and jump to the line.",
   "version": "0.1.0",
   "publisher": "zovo",
   "license": "MIT",
@@ -20,11 +20,12 @@
   ],
   "keywords": [
     "gcode viewer",
-    "gcode",
-    "g-code",
     "g-code viewer",
+    "cnc viewer",
     "gcode preview",
     "3d print preview",
+    "gcode",
+    "g-code",
     "3d printing",
     "3d printer",
     "toolpath",
@@ -47,8 +48,7 @@
     "grbl",
     "linuxcnc",
     "gco",
-    "ngc",
-    "offline"
+    "ngc"
   ],
   "main": "./dist/extension.js",
   "activationEvents": [],
