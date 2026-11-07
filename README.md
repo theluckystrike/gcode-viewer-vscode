@@ -13,7 +13,7 @@ See your 3D printer or CNC G-code as a 3D toolpath in VS Code, layer by layer, a
 ## Quick start
 
 1. Install the extension.
-2. Click a `.gcode`, `.gco` or `.nc` file in the Explorer. For `.g`, `.ngc`, `.tap` and `.cnc`, right-click the file and pick "Open in GCode Viewer".
+2. Click a `.gcode` or `.gco` file in the Explorer. For `.nc`, `.g`, `.ngc`, `.tap` and `.cnc`, right-click the file and pick "Open in GCode Viewer".
 
 ## What you can do
 
@@ -48,7 +48,7 @@ See your 3D printer or CNC G-code as a 3D toolpath in VS Code, layer by layer, a
 
 `.nc`, `.ngc`, `.tap` and `.cnc` files open in CNC mode, and so does any file with no extrusion. G0 rapids, G1 cuts, G2 and G3 arcs (I, J, K or R, helical arcs, G17, G18 and G19 planes) and plunges each get a color. Inches (G20), relative moves (G91), G92 and G28 are handled. The slider steps through Z passes. The 3D print / CNC menu reads the file again in the other mode.
 
-A `.nc` file that is really a NetCDF data file gets a short message and a button to reopen it in another editor.
+NetCDF data files also end in `.nc`, so GCode Viewer does not take over `.nc` files by default. To open all your `.nc` files in it, right-click one, pick "Open With...", then "Configure default editor for '*.nc'..." and choose GCode Viewer. A `.nc` file that is really a NetCDF data file gets a short message and a button to reopen it in another editor.
 
 ## Big files
 

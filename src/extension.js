@@ -160,7 +160,7 @@ function activate(context) {
       vscode.commands.executeCommand('workbench.action.openWalkthrough', `${EXT_ID}#gcodeViewer.start`, false)),
     vscode.commands.registerCommand('gcodeViewer.openWith', async (uri) => {
       const target = uri instanceof vscode.Uri ? uri : (vscode.window.activeTextEditor && vscode.window.activeTextEditor.document.uri);
-      if (target) await vscode.commands.executeCommand('vscode.openWith', target, /\.(gcode|gco|nc)$/i.test(target.path) ? VIEW_TYPE : VIEW_TYPE_OPTION);
+      if (target) await vscode.commands.executeCommand('vscode.openWith', target, /\.(gcode|gco)$/i.test(target.path) ? VIEW_TYPE : VIEW_TYPE_OPTION);
     }),
   );
 }

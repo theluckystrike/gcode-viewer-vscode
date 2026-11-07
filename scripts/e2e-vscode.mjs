@@ -22,7 +22,9 @@ for (const f of fs.readdirSync(ws)) if (fs.statSync(path.join(ws, f)).size < 50e
 fs.rmSync(path.join(work, 'ud'), { recursive: true, force: true });
 R.install = installVsix(work, vsix);
 const clipBefore = (() => { try { return execSync('pbpaste', { encoding: 'utf8' }); } catch { return null; } })();
-const vs = await launch(work, Number(port), ws, { 'workbench.secondarySideBar.defaultVisibility': 'hidden', 'workbench.auxiliaryBar.visible': false, 'window.titleBarStyle': 'custom', 'workbench.sideBar.location': 'left' });
+const vs = await launch(work, Number(port), ws, { 'workbench.secondarySideBar.defaultVisibility': 'hidden', 'workbench.auxiliaryBar.visible': false, 'window.titleBarStyle': 'custom', 'workbench.sideBar.location': 'left',
+  // .nc is an "option" editor (NetCDF uses .nc too); this is the setting a user gets from "Configure default editor for '*.nc'"
+  'workbench.editorAssociations': { '*.nc': 'gcodeViewer.previewOption' } });
 const shots = [];
 const shot = async (name) => { const f = path.join(shotDir, `gcode-${String(shots.length + 1).padStart(2, '0')}-${name}.png`); await vs.shot(f); shots.push(f); return f; };
 const step = async (name, fn) => {

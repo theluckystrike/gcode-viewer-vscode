@@ -65,8 +65,7 @@
         "displayName": "GCode Viewer",
         "selector": [
           { "filenamePattern": "*.gcode" },
-          { "filenamePattern": "*.gco" },
-          { "filenamePattern": "*.nc" }
+          { "filenamePattern": "*.gco" }
         ],
         "priority": "default"
       },
@@ -74,6 +73,7 @@
         "viewType": "gcodeViewer.previewOption",
         "displayName": "GCode Viewer",
         "selector": [
+          { "filenamePattern": "*.nc" },
           { "filenamePattern": "*.g" },
           { "filenamePattern": "*.ngc" },
           { "filenamePattern": "*.tap" },
@@ -196,7 +196,7 @@
           {
             "id": "open",
             "title": "Open a G-code file",
-            "description": "Click a .gcode, .gco or .nc file in the Explorer. Drag to orbit, right-drag to pan and scroll to zoom.\n[Find a G-code file](command:workbench.action.quickOpen?%5B%22.gcode%22%5D)",
+            "description": "Click a .gcode or .gco file in the Explorer. Drag to orbit, right-drag to pan and scroll to zoom.\n[Find a G-code file](command:workbench.action.quickOpen?%5B%22.gcode%22%5D)",
             "media": {
               "image": "images/cube-feature.png",
               "altText": "A cube print in GCode Viewer colored by feature, with the layer slider and print stats."
@@ -216,7 +216,7 @@
           {
             "id": "cnc",
             "title": "CNC programs",
-            "description": "Files ending in .nc open in CNC mode. Rapids, cuts, plunges and G2/G3 arcs get their own colors, and the slider steps through Z passes.",
+            "description": "Right-click a .nc CNC program and pick \"Open in GCode Viewer\". It opens in CNC mode. Rapids, cuts, plunges and G2/G3 arcs get their own colors, and the slider steps through Z passes.",
             "media": {
               "markdown": "walkthrough/cnc.md"
             }

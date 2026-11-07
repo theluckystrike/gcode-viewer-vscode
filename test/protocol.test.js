@@ -88,7 +88,9 @@ test('manifest: editors, file patterns, settings and 30 keywords', () => {
   assert.ok(pkg.displayName.length <= 45);
   assert.equal(pkg.keywords.length, 30);
   const eds = Object.fromEntries(pkg.contributes.customEditors.map((e) => [e.viewType, e]));
-  assert.deepEqual(eds['gcodeViewer.preview'].selector.map((s) => s.filenamePattern), ['*.gcode', '*.gco', '*.nc']);
+  assert.deepEqual(eds['gcodeViewer.preview'].selector.map((s) => s.filenamePattern), ['*.gcode', '*.gco']);
+  // .nc is shared with NetCDF data files, so GCode Viewer only offers itself for it (no default-editor clash)
+  assert.ok(eds['gcodeViewer.previewOption'].selector.some((s) => s.filenamePattern === '*.nc'));
   assert.equal(eds['gcodeViewer.preview'].priority, 'default');
   assert.equal(eds['gcodeViewer.previewOption'].priority, 'option');
   assert.ok(eds['gcodeViewer.previewOption'].selector.some((s) => s.filenamePattern === '*.g'));
